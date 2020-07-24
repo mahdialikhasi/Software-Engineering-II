@@ -1,0 +1,105 @@
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>داشبورد </title>
+	<!-- Font Awesome -->
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
+	<!-- <script src="https://kit.fontawesome.com/0f37303575.js" crossorigin="anonymous"></script> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/dashboard.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<style>
+	nav ul a {
+		color:rgb(36, 194, 141);
+		text-decoration: black;
+	};
+
+</style>
+
+<body style=" font-family: Vazir;">
+	<ul id="slide-out" class="sidenav sidenav-fixed" >
+		<li class="center"><a>ویسپو</a></li>
+		<li class="center"><a href="./profile.html"><i class="material-icons right-align small">assignment_ind</i>مشخصات</a></li>
+		<li class="center"><a href="./edit.html"><i class="material-icons right-align small">edit</i>ویرایش</a></li>
+		<li class="center"><a href="./courses.html"><i class="material-icons right-align small">widgets</i>دوره ها</a></li>   
+		<li class="center logout"><a href="#"><i class="material-icons  right-align small">exit_to_app</i>خروج</a></li>
+	</ul>      
+
+	<br>
+	<h5 class=" course-title center row" style="color: #008736;  margin-right: 200px;">دوره های جدید  
+		<!-- <i class="material-icons center small" style="margin:0px 10px 10px 2px;"> assignment</i> -->
+	</h5>
+	<hr>
+	<div class="container" >
+		<div class="row" style=" margin-right: 150px;">
+			<div class="col s4 m7">
+				<div class="card medium">
+					<div class="card-image">
+						<img src="images/img1.jpg">
+						<!-- <span class="card-title grey-text text-darken-4">Card Title</span> -->
+					</div>
+					<div class="card-content right-align">
+						<h5>عنوان 1</h5>
+						<p >مدرس: نام نام خانوادگی
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col s12 m7">
+				<div class="card medium">
+					<div class="card-image right-align">
+						<img src="images/img1.jpg">
+						<!-- <span class="card-title black">دوره شماره 1</span> -->
+					</div>
+					<div class="card-content right-align">
+						<h5>عنوان 1</h5>
+						<p >مدرس: نام نام خانوادگی
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col s12 m7">
+				<div class="card medium">
+					<div class="card-image">
+						<img src="images/img1.jpg">
+						<!-- <span class="card-title">Card Title</span> -->
+					</div>
+					<div class="card-content right-align">
+						<h5>عنوان 1</h5>
+						<p >مدرس: نام نام خانوادگی
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+<script>
+	$(document).ready(function(){
+		var x = localStorage['token'];
+	    console.log(x);
+	    if (!x) {
+        	window.location.replace("./main.html");
+    	}else{
+    		$(".logout").click(function(){
+    			localStorage['token'] = '';
+    			window.location.replace("./main.html");	
+    		});
+
+    	}
+	})
+</script>
+</html>

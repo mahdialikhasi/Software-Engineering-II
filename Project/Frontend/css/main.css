@@ -1,0 +1,220 @@
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+@font-face {
+    font-family: "bbcnasim";
+    src: url("../fonts/persian/bbcnasim.ttf") format("truetype");
+    src: url("../fonts/persian/bbcnasim.otf");
+    font-weight:normal;
+    font-style:normal;
+}
+
+
+@font-face {
+    font-family: "BRoya";
+    src: url("../fonts/persian/BRoya.ttf") format("truetype");
+    src: url("../fonts/persian/BRoya.eot") format("eot");
+    src: url("../fonts/persian/BRoya.woff") format("woff");
+    font-weight:normal;
+    font-style:normal;
+}
+
+@font-face {
+  font-family: Poppins-Regular;
+  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
+}
+
+
+/*//////////////////////////////////////////////////////////////////
+[ RESTYLE TAG ]*/
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: Poppins-Regular, sans-serif;
+}
+
+/*---------------------------------------------*/
+a {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+	transition: all 0.4s;
+	-webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+
+a:focus {
+	outline: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+  color: #333333;
+}
+
+/*---------------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+}
+
+p {
+	font-family: Poppins-Regular;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666666;
+	margin: 0px;
+}
+
+ul, li {
+	margin: 0px;
+	list-style-type: none;
+}
+
+
+/*---------------------------------------------*/
+
+
+/*---------------------------------------------*/
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+iframe {
+	border: none !important;
+}
+
+
+
+
+/*****************************/
+
+body {
+  font-family: "BRoya";
+  height: 100vh;
+  text-align: right;
+  direction: rtl;
+  background-color: #f2f2f2;
+}
+
+a {
+  color: #92badd;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  font-family: "BRoya";
+}
+
+body > .container {
+	background-color: white;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.login100-form-title {
+  font-size: 25px;
+  color: #555555;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+
+  width: 100%;
+  display: block;
+
+  margin-top: 200px;
+
+}
+
+.input-field > label{
+	width: unset !important;
+	right: 0 !important;
+    left: unset !important;
+}
+
+.signup .submit{
+	padding-top: 0px;
+    font-size: 15px;
+    height: 38px;
+}
+
+.background p{
+	color: white;
+    text-align: center;
+    margin-top: 60px;
+    font-size: 20px;
+    position: relative;
+    margin-right: 70px;
+    z-index: 100;
+}
+
+.background p.header{
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.background > .shadow {
+    z-index: 10;
+    background-color: rgba(0,0,0,0.3);
+}
+.background > div {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-right: 28px;
+    top: 0;
+    position: absolute;
+}
+
+.background .signup{
+	position: absolute;
+    bottom: 78px;
+    color: white;
+    right: calc(50% + 0px);
+    font-size: 17px;
+    font-weight: bold;
+    border: 1px solid white;
+    padding: 5px 23px;
+    border-radius: 40px;
+}
+
+.hidden {
+  display: none;
+}

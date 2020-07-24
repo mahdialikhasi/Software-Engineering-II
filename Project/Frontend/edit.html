@@ -1,0 +1,201 @@
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>داشبورد </title>
+	<!-- Font Awesome -->
+	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
+	<!-- <script src="https://kit.fontawesome.com/0f37303575.js" crossorigin="anonymous"></script> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="css/dashboard.css" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<style>
+	nav ul a {
+		color:rgb(36, 194, 141);
+		text-decoration: black;
+	}
+
+
+	label {
+		right: .75rem;
+		left: 0rem;
+	}
+
+	.input-field>label {
+		color: black;
+	}
+
+	.dropdown-content li>a, .dropdown-content li>span {
+		float: right;
+	}
+
+	.select-wrapper .caret {
+		display: none;
+
+	}
+
+	.modal {
+		height: 350px;
+	}
+
+
+
+</style>
+
+<body style="font-family: Vazir;">
+
+	<ul id="slide-out" class="sidenav sidenav-fixed" >
+		<li class="center"><a>ویسپو</a></li>
+		<li class="center"><a href="./profile.html"><i class="material-icons right-align small">assignment_ind</i>مشخصات</a></li>
+		<li class="center"><a href="./edit.html"><i class="material-icons right-align small">edit</i>ویرایش</a></li>
+		<li class="center"><a href="./courses.html"><i class="material-icons right-align small">widgets</i>دوره ها</a></li>   
+		<li class="center logout"><a href="#"><i class="material-icons  right-align small">exit_to_app</i>خروج</a></li>
+	</ul> 
+
+	<img src="images/forest2.jpg" alt="" width= "100%" height="180px" style="object-fit: cover;"> 
+	<img src="images/profile.png" alt="" style="position: absolute; top: 80px; right: 200px; width: 180px; height: 180px;">
+
+
+	<!-- <img src="leaf.png" alt="" style="position: absolute; left: 50px; top: 200px;"> -->
+
+	<div class="container " style="margin-top: 80px; padding: 0px 100px; margin-right: 150px;   ">
+		<div class="row">
+			<form class="col s12" id="form">
+				<div class="row">
+					<div class="input-field col s6">
+						<input  id="first_name" name="first_name" type="text" class="validate">
+						<label  for="first_name">نام</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="last_name" name="last_name" type="text" class="validate">
+						<label for="last_name">نام خانوادگی</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="phone_number" name="phone_number" type="text" class="validate">
+						<label for="phone_number">شماره همراه</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="date_of_birth" name="date_of_birth" type="text" class="datepicker">
+						<label for="date_of_birth">تاریخ تولد</label>
+					</div>
+
+
+					<div class="input-field col s12">
+
+						<select>
+							<option value=""  disabled selected>جنسیت</option>
+							<option value="1" style="margin-right: 20px;">زن</option>
+							<option value="0">مرد</option>
+						</select>
+					</div>
+
+				</div>
+				           
+				<button class="btn-large waves-effect waves-light submit" type="submit" name="action">ذخیره
+				</button>
+			</form>
+		</div>          
+	</div>
+
+
+	<script>
+		$(document).ready(function(){
+			$('.datepicker').datepicker();
+			$('select').formSelect();
+			$('.sidenav').sidenav();
+		});
+	</script>
+	<script>
+		function getUserData(id){
+			console.log("Getting user info");
+			var x = localStorage['token'];
+			console.log(x);
+			var ProfileUrl = 'http://127.0.0.1:8000/api/user/user/' + id + '/';
+
+			$.ajax({
+				type: "GET",
+				url: ProfileUrl,
+				headers: { 'Authorization': 'Token ' + x},
+				contentType: 'application/x-www-form-urlencoded'
+			}).done(function(user, status){
+				console.log(user);
+
+				$.each(user, function(index, value){
+					$("#" + index).val(value);
+					if(value){
+						$("label[for=" + index + "]").addClass("active");
+					}
+				});
+			}); 
+		}
+
+		function setUserData(id){
+			console.log("Setting user info");
+			var x = localStorage['token'];
+			console.log(x);
+			var ProfileUrl = 'http://127.0.0.1:8000/api/user/user/' + id + '/';
+			var formData = $("#form").serialize();
+			$.ajax({
+				type: "PUT",
+				url: ProfileUrl,
+				headers: { 'Authorization': 'Token ' + x},
+				contentType: 'application/x-www-form-urlencoded',
+				data: formData,
+				success : function(data, status) {
+					console.log(data);
+					window.location.replace("./profile.html");	
+				}
+			})
+		}
+
+		$(document).ready(function(){
+			var x = localStorage['token'];
+			console.log(x);
+			if (!x) {
+				window.location.replace("./main.html");
+			}else{
+				$(".logout").click(function(){
+					localStorage['token'] = '';
+					window.location.replace("./main.html"); 
+				});
+
+				var formUrl = 'http://127.0.0.1:8000/api/user/user/my_id/';
+				var id = 0;
+
+				$.when($.ajax({
+					type: "GET",
+					url: formUrl,
+					headers: { 'Authorization': 'Token ' + x},
+					contentType: 'application/x-www-form-urlencoded',
+					success: function(data, status){
+						console.log(data);
+
+						id = data.id;
+					}
+				})).then(function(){
+					getUserData(id);
+				});
+			}
+
+			$(".submit").click(function(){
+				setUserData(id);
+				return false;
+			});
+		})
+	</script>
+</body>
+</html>

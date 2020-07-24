@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>ورود</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/materialize.min.css">
+	<!--===============================================================================================-->
+
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<div class="row">
+					<form class="signup" id="form">
+						<div class="col s12">
+							<span class="login100-form-title p-b-34">
+								ورود به حساب کاربری
+							</span>	
+						</div>
+						<div class="col s12">
+
+							<div id="formFooter">
+								<div id="response-success" class="alert alert-success hidden" role="alert">
+									.ورود با موفقیت انجام شد
+								</div>
+								<div id="response-fail" class="alert alert-danger hidden" role="alert">
+									خطایی هنگام ورود رخ داده است
+								</div>
+							</div>
+						</div>
+
+						<div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="username" id="username" type="text" class="validate">
+								<label for="username">نام کاربری</label>
+							</div>
+						</div>
+						
+						<div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="password" id="password" type="password" class="validate">
+								<label for="password">رمز عبور</label>
+							</div>
+						</div>
+
+						<div class="col s12">
+							<button class="waves-effect waves-light btn-small submit">
+								ورود
+							</button>
+						</div>
+						
+						
+
+						<div class="w-full text-center p-t-27 p-b-239">
+
+							<a href="#" class="txt2">
+								نام کاربری / رمزعبور
+							</a>
+
+							<span class="txt1">
+								خود را فراموش کرده اید؟
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="col s6 background">
+				<div style="background-image: url('images/bg-01.jpg');"></div>
+				<div class="shadow"></div>
+				<p class="header">
+					تازه هستید؟
+				</p>
+				<p>با ثبت نام در سامانه از امکانات بی نظیر ما بهره مند شوید</p>
+				<a href="" class="signup">ثبت نام</a>
+			</div>
+		</div>
+	</div>
+	
+	
+	
+	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	
+	<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	
+	<!--===============================================================================================-->
+	
+	<!--===============================================================================================-->
+	
+	<!--===============================================================================================-->
+	<script src="js/materialize.min.js"></script>
+	<!--===============================================================================================-->
+	<script crossorigin="anonymous">
+
+		$(document).ready(function(){
+
+			$('#form').submit(function(){
+        //setup variables
+        var form = $(this),
+        formData = form.serialize(),
+        formUrl = 'http://127.0.0.1:8000/api/auth/login/',
+        formMethod = form.attr('method');
+
+        $.ajax({
+        	type: "POST",
+        	url: formUrl,
+        	data: formData,
+        	contentType: 'application/x-www-form-urlencoded',
+        	success: function(data, status){
+                //do something when ajax call is complete
+                console.log(data);
+                
+                if (data.error){
+                	$('#response-fail').removeClass('hidden')
+                	$('#response-success').addClass('hidden')
+                	$('#response-fail').text("error")
+                }
+                else{
+                	$('#response-success').removeClass('hidden')
+                	$('#response-fail').addClass('hidden')
+                	localStorage['token'] = data.key;
+                	window.location.replace("./courses.html");
+                }  
+            }
+        })
+
+        //prevent form from submitting
+        return false;
+    });
+
+		})
+	</script>
+</body>
+</html>

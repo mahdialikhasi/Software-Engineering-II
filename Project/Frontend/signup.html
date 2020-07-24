@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>ثبت نام </title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- Your custom styles (optional) -->
+    <link href="login_style.css" rel="stylesheet">
+</head>
+
+<body>
+
+        <div id='whole' class="wrapper fadeInDown">
+            <div id="formContent">
+              <!-- Tabs Titles -->
+              <div class="head">
+                <h4 class="text-center">ساخت حساب کاربری </h4>
+              </div>
+
+              <!-- Icon -->
+              <!-- <div class="fadeIn first">
+               <img src="profile-ava.png" alt="Avatar" class="avatar  responsive">
+              </div> -->
+
+              <!-- signup Form -->
+              <form id="form" method="post"  enctype="multipart/form-data">
+                    <h5 for="username">نام کاربری</h5>
+                    <input type="text" name="username" class="fadeIn second" required
+                     oninvalid="this.setCustomValidity('لطفا نام کاربری خود را وارد کنید')" oninput="setCustomValidity('')">
+                     <h5 for="password">گذرواژه</h5>
+                     <input type="password" name="password" class="fadeIn second"  required
+                     oninvalid="this.setCustomValidity('لطفا گذرواژه خود را وارد کنید')" oninput="setCustomValidity('')">
+                     <h5>نام</h5>
+                     <input type="text" name="first_name" class="fadeIn third" required
+                     oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید')" oninput="setCustomValidity('')">
+                     <h5>نام خانوادگی</h5>
+                     <input type="text" name="last_name" class="fadeIn third" required
+                     oninvalid="this.setCustomValidity('لطفا نام خانوادگی خود را وارد کنید')" oninput="setCustomValidity('')">
+                    <input type="submit" class="fadeIn fourth" value="ثبت نام " style="cursor:pointer;">
+              </form>
+
+              <!-- Remind Passowrd -->
+              <div id="formFooter">
+                <div id="response-success" class="alert alert-success hidden" role="alert">
+                  .ثبت نام با موفقیت انجام شد
+                </div>
+                <div id="response-fail" class="alert alert-danger hidden" role="alert">
+					خطایی هنگام ثبت نام رخ داده است
+                </div>
+              </div>
+        </div>
+
+
+</body>
+
+<script>
+
+$(document).ready(function(){
+    $('#form').submit(function(){
+        //setup variables
+        var form = $(this),
+        formData = form.serialize(),
+        formUrl = 'http://127.0.0.1:8000/api/user/user/',
+        formMethod = form.attr('method');
+  		        
+        $.ajax({
+        	type: "POST",
+            url: formUrl,
+            data: formData,
+            contentType: 'application/x-www-form-urlencoded',
+            success: function(data, status){
+                //do something when ajax call is complete
+                console.log(data);
+                if (data.error){
+                  $('#response-fail').removeClass('hidden')
+                  $('#response-success').addClass('hidden')
+                  $('#response-fail').text("error")
+                }
+                else{
+                  $('#response-success').removeClass('hidden')
+                  $('#response-fail').addClass('hidden')
+                }  
+            }
+        })
+ 
+        //prevent form from submitting
+        return false;
+    })
+})
+</script>
+
+</html>
