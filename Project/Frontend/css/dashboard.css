@@ -8,15 +8,6 @@
 }  
 
 
-
-body {
-  /* background: linear-gradient( rgba(59, 59, 59, 0.5), rgba(59, 59, 59, 0.5) ),url("bg.jpg");
-  background-size: cover; */
-  /* background-color: black;
-  opacity: 20%; */
-  position: relative;
-}
-
 .sidenav.sidenav-fixed {
   right: 0px;
   width: 150px;
@@ -25,17 +16,46 @@ body {
 
 .sidenav li>a {
   padding: 0px 0px;
-  color:#008736;;
+  color:#008736;
 }
 
 .sidenav li>a>i.material-icons {
-  color:#008736;;
-}    
+  color:#008736;
+} 
+
+.profile {
+  height: 150px;
+  width: 150px;
+  float: left;
+}
+
+.course {
+  margin-top: 50px;
+  margin-right: 200px;
+}
+
+
+
+.course-info {
+  height: 330px;
+  padding: 10 25 15 25;
+}
+
+.course-image {
+  height: 300px;
+  width: 250px;
+}
+
+
+*, *:before, *:after {
+  vertical-align: middle;
+}
 
 
 .card-image{
     height: 100%;
 };
+
 
 nav ul a {
     color:rgb(36, 194, 141);
@@ -70,5 +90,6 @@ nav ul a {
     header, main, footer {
       padding-right: 0;
     }
-  }
+  };
       
+
