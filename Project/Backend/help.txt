@@ -1,5 +1,5 @@
-admin username: se
-admin password: se
+admin username: admin
+admin password: admin
 
 teacher username: teacher
 teacher password: teacher
