@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from . import managers
+
 
 class User(AbstractUser):
     GENDER_CHOICES = (
@@ -16,6 +18,8 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=256, null=True, blank=True)
     credit = models.FloatField(default=0, null=True, blank=True)
     date_of_birth = models.CharField(max_length=256, null=True, blank=True)
+
+    objects = managers.UserManager()
 
     def __str__(self):
         return self.username + ' (' + self.first_name + ' ' + self.last_name + ')'

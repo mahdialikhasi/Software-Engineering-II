@@ -1,0 +1,8 @@
+admin username: se
+admin password: se
+
+teacher username: teacher
+teacher password: teacher
+
+student username: student
+student password: student
