@@ -43,11 +43,11 @@
                 <div class="course-info card right-align">
                     <div style="margin-top: 20px; color: rgb(78, 214, 96) ;">  
                         <h6><i class="material-icons  small">person</i>ظرفیت:</h6>
-                        <h6>ظرفیت دوره</h6>
+                        <h6 id="capacity">ظرفیت دوره</h6>
                     </div>
                     <div style="color: rgb(253, 117, 99);">  
                         <h6><i class="material-icons right-align small">attach_money</i>هزینه:</h6>
-                        <h6>هزینه تومان</h6>
+                        <h6 id='price'>هزینه تومان</h6>
                     </div>
 
                     <div style="color: rgb(73, 173, 255) ;">  
@@ -66,8 +66,8 @@
             </div>
             <div class="col s8">
                 <div class="course-info card right-align">
-                    <h4>عنوان دوره</h4>     
-                    <p> ملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
+                    <h4 id="name">عنوان دوره</h4>     
+                    <p id="content_titles"> ملورم ایپسوم متن ساختگی با تولید سادگی نامفهوم
                         ملورم ایپسوم متن ساختگی
                         با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است،
                     </p>    
@@ -114,18 +114,38 @@
 </body>
 
 <script>
-	// $(document).ready(function(){
-	// 	var x = localStorage['token'];
-	//     console.log(x);
-	//     if (!x) {
-    //     	window.location.replace("./main.html");
-    // 	}else{
-    // 		$(".logout").click(function(){
-    // 			localStorage['token'] = '';
-    // 			window.location.replace("./main.html");	
-    // 		});
+	$(document).ready(function(){
+		var x = localStorage['token'];
+	    console.log(x);
+	    if (!x) {
+        	window.location.replace("./main.html");
+    	}else{
+    		$(".logout").click(function(){
+    			localStorage['token'] = '';
+    			window.location.replace("./main.html");	
+    		});
 
-    // 	}
-	// })
+            let searchParams = new URLSearchParams(window.location.search);
+            id = searchParams.get('id');
+            console.log("Getting course " + id + " info ");
+            
+            var Url = 'http://127.0.0.1:8000/api/education/course/' + id + "/";
+            
+            $.ajax({
+                type: "GET",
+                url: Url,
+                headers: { 'Authorization': 'Token ' + x},
+                contentType: 'application/x-www-form-urlencoded'
+            }).done(function(course, status){
+                console.log(course);
+            
+                
+                $.each(course, function(index, value){
+                    $("#" + index).html(value);
+                });
+                
+            })
+    	}
+	})
 </script>
 </html>
