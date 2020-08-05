@@ -8,6 +8,26 @@
 }  
 
 
+.hidden {
+  display: none;
+}
+
+.tabs .tab a {
+  color: rgb(78, 214, 96);
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+  color: green;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+  background-color: white;
+}
+
+.tabs .indicator {
+  background-color: green;
+}
+
 .sidenav.sidenav-fixed {
   right: 0px;
   width: 150px;
