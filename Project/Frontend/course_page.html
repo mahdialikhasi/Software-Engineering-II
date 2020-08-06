@@ -29,7 +29,7 @@
 
 <body style=" font-family: Vazir;">
 	<ul id="slide-out" class="sidenav sidenav-fixed" >
-		<li class="center"><a>ویسپو</a></li>
+		<li class="center"><a href="./main.html">ویسپو</a></li>
 		<li class="center"><a href="./profile.html"><i class="material-icons right-align small">assignment_ind</i>مشخصات</a></li>
 		<li class="center"><a href="./edit.html"><i class="material-icons right-align small">edit</i>ویرایش</a></li>
 		<li class="center"><a href="./courses.html"><i class="material-icons right-align small">widgets</i>دوره ها</a></li>   
@@ -58,9 +58,12 @@
                     </div>
                     <br>
                     <div class="center">
-                        <button class="btn-large waves-effect waves-light green" type="button" name="action">ثبت نام
+                        <button data-target="error" id="register" class="btn-large modal-trigger waves-effect waves-light green" type="button" name="action">ثبت نام
                         </button>
                      </div>
+
+                     <!-- <button data-target="modal1" class="btn modal-trigger">Modal</button> -->
+
 
                 </div>
             </div>
@@ -111,18 +114,35 @@
 
     </div>
 
+    <div id="error" class="modal red accent-2" style="color: white;">
+        <div class="modal-content">
+          <h4>اعتبار ناکافی</h4>
+          <p>اعتبار شما برای ثبت نام در این دوره کافی نیست.</p>
+        </div>
+        <div class="modal-footer red accent-2">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat" style="color: white;">بستن</a>
+        </div>
+      </div>
+
+
 </body>
 
 <script>
 	$(document).ready(function(){
+        $('.modal').modal();
+        if (1 == 2)
+            $('.modal').modal('close');
 		var x = localStorage['token'];
 	    console.log(x);
 	    if (!x) {
-        	window.location.replace("./main.html");
+        	// window.location.replace("./main.html");
+            $('#register').replaceWith('<div style="color: red;">برای ثبت نام در این دوره لطفا وارد صفحه شخصی خود شوید.</div>')
+
     	}else{
     		$(".logout").click(function(){
     			localStorage['token'] = '';
-    			window.location.replace("./main.html");	
+    			window.location.replace("./main.html");
+
     		});
 
             let searchParams = new URLSearchParams(window.location.search);
