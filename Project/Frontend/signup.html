@@ -7,30 +7,136 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>ثبت نام </title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    
+    <!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    
+    <!--===============================================================================================-->
+    
+    <!--===============================================================================================-->
+    
+    <!--===============================================================================================-->
+    <script src="js/materialize.min.js"></script>
     <!-- Your custom styles (optional) -->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">	
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css">
     <link href="login_style.css" rel="stylesheet">
 </head>
 
 <body>
 
-        <div id='whole' class="wrapper fadeInDown">
+
+
+	<div class="container">
+		<div class="row">
+			<div class="col s6">
+				<div class="row">
+					<form id="form" class="signup" method="post"  enctype="multipart/form-data">
+						<div class="col s12">
+							<span class="login100-form-title p-b-34" style="margin-top: 100px;">
+								 ساخت حساب کاربری
+							</span>	
+						</div>
+						<div class="col s12">
+
+							<div id="formFooter">
+								<div id="response-success" class="alert alert-success hidden" role="alert">
+									.ثبت نام با موفقیت انجام شد
+								</div>
+								<div id="response-fail" class="alert alert-danger hidden" role="alert">
+									خطایی هنگام ثبت نام رخ داده است
+								</div>
+							</div>
+						</div>
+
+						<div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="username" id="username" type="text" class="validate" required
+                oninvalid="this.setCustomValidity('لطفا نام کاربری خود را وارد کنید')" oninput="setCustomValidity('')">
+								<label for="username">نام کاربری</label>
+							</div>
+						</div>
+						
+						<div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="password" id="password" type="password" class="validate"  required
+                oninvalid="this.setCustomValidity('لطفا گذرواژه خود را وارد کنید')" oninput="setCustomValidity('')">
+								<label for="password">رمز عبور</label>
+							</div>
+            </div>
+            
+            <div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="first_name" id="first_name" type="text" class="validate" required
+                oninvalid="this.setCustomValidity('لطفا نام خود را وارد کنید')" oninput="setCustomValidity('')">
+								<label for="first_name">نام </label>
+							</div>
+            </div>
+            
+            <div class="col s12">
+							<div class="input-field m-b-20">
+								<input name="last_name" id="last_name" type="text" class="validate" required 
+                oninvalid="this.setCustomValidity('لطفا نام خانوادگی خود را وارد کنید')" oninput="setCustomValidity('')">
+								<label for ="last_name"> نام خانوادگی</label>
+							</div>
+            </div>
+
+						<div class="col s12">
+							<button class="waves-effect waves-light btn-small submit" type="submit">
+								ثبت نام
+							</button>
+						</div>
+						
+            <div class="w-full text-center p-t-27 p-b-239">
+
+							<a href="#" class="txt2 hidden">
+								نام کاربری / رمزعبور
+							</a>
+
+							<span class="txt1" style="opacity: 0;">
+								خود را فراموش کرده اید؟
+							</span>
+						</div>	
+					</form>
+				</div>
+			</div>
+
+			<div class="col s6 background">
+				<div style="background-image: url('images/bg-01.jpg');"></div>
+				<div class="shadow"></div>
+				<p class="header">
+					حساب کاربری دارید؟
+				</p>
+				<a href="./login.html" class="signup sign-log"> ورود</a>
+			</div>
+		</div>
+  </div>
+  
+
+        <!-- <div id='whole' class="wrapper fadeInDown">
             <div id="formContent">
-              <!-- Tabs Titles -->
               <div class="head">
                 <h4 class="text-center">ساخت حساب کاربری </h4>
               </div>
 
-              <!-- Icon -->
-              <!-- <div class="fadeIn first">
-               <img src="profile-ava.png" alt="Avatar" class="avatar  responsive">
-              </div> -->
 
-              <!-- signup Form -->
               <form id="form" method="post"  enctype="multipart/form-data">
                     <h5 for="username">نام کاربری</h5>
                     <input type="text" name="username" class="fadeIn second" required
@@ -47,7 +153,6 @@
                     <input type="submit" class="fadeIn fourth" value="ثبت نام " style="cursor:pointer;">
               </form>
 
-              <!-- Remind Passowrd -->
               <div id="formFooter">
                 <div id="response-success" class="alert alert-success hidden" role="alert">
                   .ثبت نام با موفقیت انجام شد
@@ -56,7 +161,7 @@
 					خطایی هنگام ثبت نام رخ داده است
                 </div>
               </div>
-        </div>
+        </div> -->
 
 
 </body>
@@ -77,17 +182,12 @@ $(document).ready(function(){
             data: formData,
             contentType: 'application/x-www-form-urlencoded',
             success: function(data, status){
-                //do something when ajax call is complete
-                console.log(data);
-                if (data.error){
-                  $('#response-fail').removeClass('hidden')
-                  $('#response-success').addClass('hidden')
-                  $('#response-fail').text("error")
-                }
-                else{
-                  $('#response-success').removeClass('hidden')
-                  $('#response-fail').addClass('hidden')
-                }  
+              localStorage['token'] = data.key;
+              window.location.replace("./courses.html");
+            },
+            error: function(data, status){
+              $('#response-fail').removeClass('hidden')
+              $('#response-success').addClass('hidden')
             }
         })
  
