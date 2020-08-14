@@ -149,7 +149,7 @@ class UserViewSet(viewsets.ModelViewSet):
         if request.user.is_anonymous:
             return Response(data={"detail": "user is anonymous"},
                             status=status.HTTP_400_BAD_REQUEST)
-        if not request.user.role.id == 2:
+        if not request.user.role == 2:
             return Response(data={"detail": "user must be student"},
                             status=status.HTTP_400_BAD_REQUEST)
         if 'amount' in request.data:
@@ -165,15 +165,15 @@ class UserViewSet(viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
         request.user.credit += amount
         request.user.save()
-        return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
+        return Response(data={'detail': 'charge is done successfully'}, status=status.HTTP_200_OK)
 
-    @action(methods=['post'], detail=True)
+    @action(methods=['get'], detail=True)
     def courses(self, request, pk):
         if request.user.is_anonymous:
             return Response(data={"detail": "user is anonymous"},
                             status=status.HTTP_400_BAD_REQUEST)
         response_data = {"courses": []}
-        course_objects = [Course.objects.get(course=student_course_object.course) for student_course_object
+        course_objects = [student_course_object.course for student_course_object
                           in StudentCourse.objects.filter(student=models.User.objects.get(id=pk))]
         for course_object in course_objects:
             response_data["courses"].append({'course_id': course_object.id, 'course_name': course_object.name})

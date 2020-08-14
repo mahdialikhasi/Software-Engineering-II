@@ -55,7 +55,7 @@ class CourseViewSet(viewsets.ModelViewSet):
         if request.user.is_anonymous:
             return Response(data={"detail": "user is anonymous"},
                             status=status.HTTP_400_BAD_REQUEST)
-        if not request.user.role.id == 2:
+        if not request.user.role == 2:
             return Response(data={"detail": "user must be student"},
                             status=status.HTTP_400_BAD_REQUEST)
         student = request.user
