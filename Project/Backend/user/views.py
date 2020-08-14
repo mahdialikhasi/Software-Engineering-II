@@ -177,4 +177,4 @@ class UserViewSet(viewsets.ModelViewSet):
                           in StudentCourse.objects.filter(student=models.User.objects.get(id=pk))]
         for course_object in course_objects:
             response_data["courses"].append({'course_id': course_object.id, 'course_name': course_object.name})
-        return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
+        return Response(response_data, status=status.HTTP_200_OK)
