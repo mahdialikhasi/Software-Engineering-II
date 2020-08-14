@@ -3,6 +3,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 
+from education.models import Course, StudentCourse
 from . import serializers, models
 
 
@@ -164,4 +165,16 @@ class UserViewSet(viewsets.ModelViewSet):
                             status=status.HTTP_400_BAD_REQUEST)
         request.user.credit += amount
         request.user.save()
+        return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
+
+    @action(methods=['post'], detail=True)
+    def courses(self, request, pk):
+        if request.user.is_anonymous:
+            return Response(data={"detail": "user is anonymous"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        response_data = {"courses": []}
+        course_objects = [Course.objects.get(course=student_course_object.course) for student_course_object
+                          in StudentCourse.objects.filter(student=models.User.objects.get(id=pk))]
+        for course_object in course_objects:
+            response_data["courses"].append({'course_id': course_object.id, 'course_name': course_object.name})
         return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
