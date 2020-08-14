@@ -142,3 +142,26 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(data={"detail": "user is anonymous"},
                             status=status.HTTP_400_BAD_REQUEST)
         return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
+
+    @action(methods=['post'], detail=False)
+    def charge(self, request):
+        if request.user.is_anonymous:
+            return Response(data={"detail": "user is anonymous"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        if not request.user.role.id == 2:
+            return Response(data={"detail": "user must be student"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        if 'amount' in request.data:
+            amount = request.data['amount']
+            if not (isinstance(amount, int) or isinstance(amount, float)):
+                return Response(data={'detail': 'amount must be int or float'},
+                                status=status.HTTP_400_BAD_REQUEST)
+            if amount <= 0:
+                return Response(data={'detail': 'amount must be greater than 0'},
+                                status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(data={"detail": "amount is necessary"},
+                            status=status.HTTP_400_BAD_REQUEST)
+        request.user.credit += amount
+        request.user.save()
+        return Response(data={'id': request.user.id}, status=status.HTTP_200_OK)
