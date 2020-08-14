@@ -205,7 +205,7 @@ body > .container {
 
 .background .signup{
 	position: absolute;
-    bottom: 78px;
+    /* bottom: 78px; */
     color: white;
     right: calc(50% + 0px);
     font-size: 17px;
@@ -217,4 +217,10 @@ body > .container {
 
 .hidden {
   display: none;
+}
+
+.sign-log {
+  z-index: 20;
+  bottom: auto;
+  margin-top: 20px;
 }

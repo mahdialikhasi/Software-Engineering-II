@@ -7,7 +7,6 @@
 	<!-- Font Awesome -->
 	<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
 	<!-- <script src="https://kit.fontawesome.com/0f37303575.js" crossorigin="anonymous"></script> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -26,78 +25,99 @@
 
 <body style=" font-family: Vazir;">
 	<ul id="slide-out" class="sidenav sidenav-fixed" >
-		<li class="center"><a>ویسپو</a></li>
+		<li class="center"><a href="./main.html">ویسپو</a></li>
 		<li class="center"><a href="./profile.html"><i class="material-icons right-align small">assignment_ind</i>مشخصات</a></li>
 		<li class="center"><a href="./edit.html"><i class="material-icons right-align small">edit</i>ویرایش</a></li>
-		<li class="center"><a href="./courses.html"><i class="material-icons right-align small">widgets</i>دوره ها</a></li>   
+		<li class="center"><a href="./courses.html"><i class="material-icons right-align small">widgets</i> دوره ها</a></li>   
 		<li class="center logout"><a href="#"><i class="material-icons  right-align small">exit_to_app</i>خروج</a></li>
 	</ul>      
 
 	<br>
-	<h5 class=" course-title center row" style="color: #008736;  margin-right: 200px;">دوره های جدید  
-		<!-- <i class="material-icons center small" style="margin:0px 10px 10px 2px;"> assignment</i> -->
-	</h5>
-	<hr>
-	<div class="container" >
-		<div class="row" style=" margin-right: 150px;">
-			<div class="col s4 m7">
-				<div class="card medium">
-					<div class="card-image">
-						<img src="images/img1.jpg">
-						<!-- <span class="card-title grey-text text-darken-4">Card Title</span> -->
-					</div>
-					<div class="card-content right-align">
-						<h5>عنوان 1</h5>
-						<p >مدرس: نام نام خانوادگی
-						</p>
-					</div>
-				</div>
-			</div>
+	<div class="row right-align">
+		<div class="col s12">
+		  <ul class="tabs" style="margin-bottom: 30px;">
+			<li class="tab col s3 right active" style="margin-right: 75px;"><a href="#new">
+				<h6 >دوره های جدید</h6>  
+			</a></li>
+			<li id="my-courses" class="tab col s3 right hidden"><a href="#mine">
+				<h6 >دوره های من</h6>  
+			</a></li>
+			</ul>
+		</div>
+		<hr style="position: absolute; top: 60px; width: 99.5%; opacity: 0.5;">
 
-			<div class="col s12 m7">
-				<div class="card medium">
-					<div class="card-image right-align">
-						<img src="images/img1.jpg">
-						<!-- <span class="card-title black">دوره شماره 1</span> -->
-					</div>
-					<div class="card-content right-align">
-						<h5>عنوان 1</h5>
-						<p >مدرس: نام نام خانوادگی
-						</p>
-					</div>
-				</div>
-			</div>
+		
 
-			<div class="col s12 m7">
-				<div class="card medium">
-					<div class="card-image">
-						<img src="images/img1.jpg">
-						<!-- <span class="card-title">Card Title</span> -->
-					</div>
-					<div class="card-content right-align">
-						<h5>عنوان 1</h5>
-						<p >مدرس: نام نام خانوادگی
-						</p>
-					</div>
-				</div>
+		<div id="new" class="container" >
+			<div class="row courses-row" style=" margin-right: 150px;">
+				
+	
 			</div>
 		</div>
 
+		<div id="mine" class="container" >
+			<div class="row my-courses-row" style=" margin-right: 150px;">
+	
+			</div>
+		</div>	
 	</div>
+	
 
 </body>
 
 <script>
 	$(document).ready(function(){
+		$('.tabs').tabs();
 		var x = localStorage['token'];
 	    console.log(x);
 	    if (!x) {
-        	window.location.replace("./main.html");
+        	// window.location.replace("./main.html");
+			$('#my-courses').removeClass('tab')
+			$('#slide-out').replaceWith(`	<ul id="slide-out" class="sidenav sidenav-fixed" >
+		<li class="center"><a href="./main.html">ویسپو</a></li>
+		<li class="center"><a href="./signup.html"><i class="material-icons right-align small">person_add</i>ثبت نام</a></li>
+		<li class="center"><a href="./login.html"><i class="material-icons right-align small">keyboard_return</i>ورود</a></li>
+
+	</ul>   `)
     	}else{
     		$(".logout").click(function(){
     			localStorage['token'] = '';
     			window.location.replace("./main.html");	
+
     		});
+
+    		console.log("Getting courses info ");
+			
+        	var Url = 'http://127.0.0.1:8000/api/education/course/';
+
+			
+			$.ajax({
+    			type: "GET",
+    			url: Url,
+    			headers: { 'Authorization': 'Token ' + x},
+    			contentType: 'application/x-www-form-urlencoded'
+    		}).done(function(course, status){
+    			console.log(course);
+            
+            	$.each(course, function(index, value){
+            		var course = `
+						<div class="col s4 course-` + value.id + ` right">
+							<div class="card medium">
+								<div class="card-image">
+									<img src="images/img1.jpg">
+								</div>
+								<div class="card-content right-align">
+									<h5><a href="./course_page.html?id=` + value.id + `">` + value.name + `</a></h5>
+									<p >زمان: ` + value.time + `
+									</p>
+								</div>
+							</div>
+						</div>
+						
+					`;
+					$(".courses-row").append(course);
+            	});
+    		})
 
     	}
 	})
