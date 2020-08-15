@@ -96,7 +96,7 @@
 				<h6 style="font-weight: bold;">
 					اعتبار
 				</h6>
-				<h6 id="credit">جنسیت  </h6>
+				<h6 id="credit">اعتبار  </h6> تومان
 			</div>
 		</div>
 
@@ -122,6 +122,9 @@
 					علایق  
 				</h6>
 				<h6 id="interests"> علایق </h6>
+			</div>
+			<div class="col">
+				<button id="add-credit" class="btn-large modal-trigger waves-effect waves-light green" type="button" name="action">افزایش اعتبار</button>
 			</div>
 		</div>
 	</div>
@@ -170,6 +173,23 @@
            	 		}
         		})).then(function(){
         			getUserData(id);
+        		});
+
+        		$("#add-credit").click(function(){
+        			var addUrl = 'http://127.0.0.1:8000/api/user/user/charge/'
+        			var amount = 100000;
+        			$.when($.ajax({
+	        			type: "POST",
+	        			url: addUrl,
+	        			headers: { 'Authorization': 'Token ' + x},
+	        			contentType: 'application/json',
+	        			data : '{"amount":' + amount + '}',
+	        			success: function(data, status){
+			                console.log(data);
+	           	 		}
+	        		})).then(function(){
+	        			getUserData(id);
+	        		});	
         		});
 			}	
 		})

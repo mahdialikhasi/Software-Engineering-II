@@ -58,12 +58,9 @@
                     </div>
                     <br>
                     <div class="center">
-                        <button data-target="error" id="register" class="btn-large modal-trigger waves-effect waves-light green" type="button" name="action">ثبت نام
+                        <button id="register" class="btn-large waves-effect waves-light green" type="button" name="action">ثبت نام
                         </button>
                      </div>
-
-                     <!-- <button data-target="modal1" class="btn modal-trigger">Modal</button> -->
-
 
                 </div>
             </div>
@@ -116,7 +113,7 @@
 
     <div id="error" class="modal red accent-2" style="color: white;">
         <div class="modal-content">
-          <h4>اعتبار ناکافی</h4>
+          <h4>خطا</h4>
           <p>اعتبار شما برای ثبت نام در این دوره کافی نیست.</p>
         </div>
         <div class="modal-footer red accent-2">
@@ -164,6 +161,27 @@
                     $("#" + index).html(value);
                 });
                 
+            })
+
+            $("#register").click(function(){
+            	var registerUrl = 'http://127.0.0.1:8000/api/education/course/' + id + '/registration/';
+            	$.ajax({
+        			type: "POST",
+        			url: registerUrl,
+        			headers: { 'Authorization': 'Token ' + x},
+        			contentType: 'application/json',
+        			success: function(data, status){
+		                console.log(data);
+           	 		},
+           	 		statusCode:{ 
+           	 			400 : function(data, status){
+           	 				console.log(data.responseText);
+           	 				$("#error p").html(data.responseText);
+           	 				$("#error").modal('open');
+
+           	 			}
+           	 		}
+        		})
             })
     	}
 	})

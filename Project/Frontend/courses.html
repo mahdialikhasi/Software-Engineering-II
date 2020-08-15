@@ -66,6 +66,38 @@
 </body>
 
 <script>
+	function loadMy(id, x)
+	{
+		var myUrl = 'http://127.0.0.1:8000/api/user/user/' + id + '/courses/';
+		$.ajax({
+    			type: "GET",
+    			url: myUrl,
+    			headers: { 'Authorization': 'Token ' + x},
+    			contentType: 'application/x-www-form-urlencoded'
+    		}).done(function(course, status){
+    			console.log(course);
+    			console.log(course.courses);
+            
+            	$.each(course.courses, function(index, value){
+            		var course = `
+						<div class="col s4 course-` + value.course_id + ` right">
+							<div class="card medium">
+								<div class="card-image">
+									<img src="images/img1.jpg">
+								</div>
+								<div class="card-content right-align">
+									<h5><a href="./course_page.html?id=` + value.course_id + `">` + value.course_name + `</a></h5>
+									<!--<p >زمان: ` + value.time + `
+									</p>-->
+								</div>
+							</div>
+						</div>
+						
+					`;
+					$(".my-courses-row").append(course);
+            	});
+    		})
+	}
 	$(document).ready(function(){
 		$('.tabs').tabs();
 		var x = localStorage['token'];
@@ -118,6 +150,22 @@
 					$(".courses-row").append(course);
             	});
     		})
+
+    		var formUrl = 'http://127.0.0.1:8000/api/user/user/my_id/';
+    		id = 0;
+    		$.when($.ajax({
+    			type: "GET",
+    			url: formUrl,
+    			headers: { 'Authorization': 'Token ' + x},
+    			contentType: 'application/x-www-form-urlencoded',
+    			success: function(data, status){
+	                console.log(data);
+	                id = data.id;  
+       	 		}
+    		})).then(function(){
+    			loadMy(id, x);
+    		});
+
 
     	}
 	})
